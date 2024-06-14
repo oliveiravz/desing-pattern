@@ -1,0 +1,23 @@
+i {
+    text-decoration: none;
+    color: white;
+}
+
+#calendar {
+    width: 100%;
+    border: 1px solid #313443;
+    border-radius: 4    x;
+    background-color: #FFF;
+    padding: 15px;
+}
+
+.comunicado {
+    text-align: right;
+    font-size: 25px;
+}
+
+.bem_vindo {
+    display: flex;
+    text-align: left;
+    font-size: 25px;
+}

@@ -1,0 +1,42 @@
+<?php
+namespace App\Models;
+
+use PDO;
+use App\Models\Model;
+use App\Config\Connection;
+
+class Login extends Model
+{
+    protected string $table = "morador";
+
+    public function getMorador(array $data) {
+
+        $email = strtoupper(trim($data['email']));
+        $senha = trim($data['senha']);
+
+        $sql = "SELECT 
+                    apartamento.descricao,
+                    apartamento.id_apartamento,
+                    morador.id_morador,
+                    morador.email,
+                    morador.nome,
+                    morador.senha,
+                    morador.nome
+                FROM morador
+                INNER JOIN apartamento ON apartamento.id_apartamento = morador.apartamento_id_apartamento
+                WHERE morador.ativo IS TRUE
+                AND morador.email = :email
+                AND morador.senha = :senha";
+        $conn = new Connection();
+        $pdo = $conn->getPdo();
+        
+        $stmt = $pdo->prepare($sql);
+
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':senha', $senha);
+
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+}
