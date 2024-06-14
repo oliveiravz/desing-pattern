@@ -5,8 +5,14 @@ $this->layout(
         'title' => "$title"
     ]
 );
-
 ?>
+
+<style>
+    span {
+        color: red;
+        font-weight: bolder;
+    }
+</style>
 
 <main class="container content">
     <h1 style="text-align: center;">Cadastrar novos usuários</h1>
@@ -14,20 +20,20 @@ $this->layout(
     <form method="POST" action="/user">
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="email">E-mail</label>
+                <label for="email">E-mail<span>*</span></label>
                 <input type="email" class="form-control" id="email" name="email" placeholder="E-mail" required>
             </div>
             <div class="form-group col-md-6">
-                <label for="senha">Senha</label>
+                <label for="senha">Senha<span>*</span></label>
                 <input type="password" class="form-control" id="senha" name="senha" placeholder="Senha" required>
             </div>
         </div>
         <div class="form-group">
-            <label for="nome">Nome</label>
+            <label for="nome">Nome<span>*</span></label>
             <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome" required>
         </div>
         <div class="form-group">
-            <label for="cpf">CPF</label>
+            <label for="cpf">CPF<span>*</span></label>
             <input type="text" class="form-control" id="cpf" name="cpf" placeholder="CPF" required>
         </div>
         <div class="form-group">
@@ -43,18 +49,17 @@ $this->layout(
                 <label for="email_2">E-mail 2</label>
                 <input type="email" class="form-control" id="email_2" name="email_2" placeholder="E-mail 2">
             </div>
-            <div class="form-group col-md-4">
-                <label for="apartamento">Apartamento</label>
+            <div class="form-group col-md-6">
+                <label for="apartamento">Apartamento<span>*</span></label>
                 <select id="apartamento" name="apartamento_id_apartamento" class="form-control" required>
                     <option value="" selected disabled>Selecione</option>
-                    <!-- Opções de apartamentos devem ser carregadas dinamicamente -->
+                    <?php foreach ($data['apartamentos'] as $key => $value) {?>
+                        <option value="<?=$value['id_apartamento']?>" ><?=$value['descricao']?></option>
+                    <?php } ?>
                 </select>
-            </div>
-            <div class="form-group col-md-2">
-                <label for="inputZip">Zip</label>
-                <input type="text" class="form-control" id="inputZip" name="inputZip">
             </div>
         </div>
         <button type="submit" class="btn btn-primary">Cadastrar</button>
     </form>
 </main>
+

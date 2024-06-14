@@ -1,9 +1,7 @@
 <?php
 namespace App\Models;
 
-use App\Config\Connection;
-
-class Apartamento
+class Apartamento extends Model
 {
     protected string $table = "apartamento";
 

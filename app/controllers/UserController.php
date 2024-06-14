@@ -20,9 +20,12 @@ class UserController extends Controller
 
     public function getApartamentos() {
 
+        $result = [];
         $apartamentos = new Apartamento();
+        
+        $result['apartamentos'] = $apartamentos->fetchAll();
 
-        $this->index($apartamentos);
+        $this->index($result);
     }
 }
 

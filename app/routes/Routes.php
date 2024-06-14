@@ -11,16 +11,17 @@ class Routes
                 "/login" => "LoginController@index",
                 "/home" => "HomeController@index",
                 "/user" => "UserController@index",
+                "/user" => "UserController@getApartamentos",
                 "/relatorio" => "AuditoriaController@get",
                 "/areas" => "AreasLazerController@get",
                 "/reservas" => "ReservaController@getReservas",
                 "/logout" => "Logout@logout"
             ],
-            "post" => [
+           "post" => [
                 "/user" => "UserController@store",
                 "/validate" => "LoginController@validate",
                 "/reservar" => "ReservaController@store"
             ]
-        ];
+        ]; 
     }
 }
