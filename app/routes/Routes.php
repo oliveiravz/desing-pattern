@@ -15,12 +15,14 @@ class Routes
                 "/relatorio" => "AuditoriaController@get",
                 "/areas" => "AreasLazerController@get",
                 "/reservas" => "ReservaController@getReservas",
-                "/logout" => "Logout@logout"
+                "/logout" => "Logout@logout",
+                "/apartamento"=>"ApartamentoController@index"
             ],
            "post" => [
                 "/user" => "UserController@store",
                 "/validate" => "LoginController@validate",
-                "/reservar" => "ReservaController@store"
+                "/reservar" => "ReservaController@store",
+                "/apartamento"=>"ApartamentoController@cadastro"
             ]
         ]; 
     }

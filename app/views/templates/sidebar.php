@@ -16,6 +16,12 @@
 		</li>
 		<? } ?>
 		<li>
+			<a href="/apartamento">
+				<i class="fas fa-clipboard-list" style="color: #ffffff;"></i>
+			</a>
+			<span class="tooltip">Cadastrar Apartamentos</span>
+		</li>
+		<li>
 			<a href="#">
 				<i class="fas fa-clipboard-list" style="color: #ffffff;"></i>
 			</a>

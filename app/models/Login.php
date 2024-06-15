@@ -2,15 +2,13 @@
 namespace App\Models;
 
 use PDO;
-use App\Models\Model;
 use App\Config\Connection;
 
-class Login extends Model
+class Login extends Model implements MoradorInterface
 {
     protected string $table = "morador";
 
     public function getMorador(array $data) {
-
         $email = strtoupper(trim($data['email']));
         $senha = trim($data['senha']);
 
@@ -27,11 +25,11 @@ class Login extends Model
                 WHERE morador.ativo IS TRUE
                 AND morador.email = :email
                 AND morador.senha = :senha";
+        
         $conn = new Connection();
         $pdo = $conn->getPdo();
         
         $stmt = $pdo->prepare($sql);
-
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':senha', $senha);
 
