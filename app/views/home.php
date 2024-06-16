@@ -5,10 +5,13 @@
             'title' => "$title"
         ]
     );
+
+    // dd($_SESSION);
+
 ?>
 
 <?= $this->start('homeCss')?>
-    <link rel="stylesheet" href="assets/css/home.css">
+    <link rel="stylesheet" href="/assets/css/home.css">
 <?= $this->stop()?>
 
 <main class="content">
@@ -22,10 +25,12 @@
             <?php } ?>
             <p class="bem_vindo">Clique na data para realizar sua reserva<p/>
         </div>
-        <br>
-        <br>
         <div id="calendar"></div>
         <input type="hidden" name="user_id" id="user_id" value="<?=$_SESSION['user']['id_morador']?>">
         <input type="hidden" name="user_apartamento" id="user_apartamento" value="<?=$_SESSION['user']['id_apartamento']?>">
     </div>
 </main>
+
+<?= $this->start('fullcalendar')?>
+    <script src="/assets/js/fullcalendar.js"></script>
+<?= $this->stop()?>

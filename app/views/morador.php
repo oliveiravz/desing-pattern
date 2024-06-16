@@ -1,44 +1,50 @@
-<?php
-$this->layout(
-    'master',
-    [
-        'title' => "$title"
-    ]
-);
-?>
+<?php $this->layout( 'master', [ 'title' => "$title" ]); ?>
 
 <style>
-    span {
+    .span-morador {
         color: red;
         font-weight: bolder;
     }
 </style>
 
+
+<?php if (isset($data['success']) && $data['success']) { ?>
+    <div class="alert alert-success" style="text-align: center;">
+        <?= $data['message'] ?>
+    </div>
+<?php } ?>
+
+<?php if (isset($data['success']) && !$data['success']) { ?>
+    <div class="alert alert-danger" style="text-align: center;">
+        <?= $data['message'] ?>
+    </div>
+<?php } ?>
+
 <main class="container content">
     <h1 style="text-align: center;">Cadastrar novos usuários</h1>
     <br>
-    <form method="POST" action="/user">
+    <form method="POST" action="/morador">
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="email">E-mail<span>*</span></label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="E-mail" required>
+                <label for="email">E-mail<span class="span-morador">*</span></label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="E-mail" required value="email_exemplo@email.com.br">
             </div>
             <div class="form-group col-md-6">
-                <label for="senha">Senha<span>*</span></label>
-                <input type="password" class="form-control" id="senha" name="senha" placeholder="Senha" required>
+                <label for="senha">Senha<span class="span-morador">*</span></label>
+                <input type="password" class="form-control" id="senha" name="senha" placeholder="Senha" required value="senha1234">
             </div>
         </div>
         <div class="form-group">
-            <label for="nome">Nome<span>*</span></label>
-            <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome" required>
+            <label for="nome">Nome<span class="span-morador">*</span></label>
+            <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome" required value="Victor Oliveira">
         </div>
         <div class="form-group">
-            <label for="cpf">CPF<span>*</span></label>
-            <input type="text" class="form-control" id="cpf" name="cpf" placeholder="CPF" required>
+            <label for="cpf">CPF<span class="span-morador">*</span></label>
+            <input type="text" class="form-control" id="cpf" name="cpf" placeholder="CPF" required value="145.789.847-96">
         </div>
         <div class="form-group">
             <label for="telefone_1">Telefone</label>
-            <input type="text" class="form-control" id="telefone_1" name="telefone_1" placeholder="Telefone">
+            <input type="text" class="form-control" id="telefone_1" name="telefone_1" placeholder="Telefone" value="(14) 99878-9855">
         </div>
         <div class="form-group">
             <label for="telefone_2">Telefone 2</label>
@@ -50,7 +56,7 @@ $this->layout(
                 <input type="email" class="form-control" id="email_2" name="email_2" placeholder="E-mail 2">
             </div>
             <div class="form-group col-md-6">
-                <label for="apartamento">Apartamento<span>*</span></label>
+                <label for="apartamento">Apartamento<span class="span-morador">*</span></label>
                 <select id="apartamento" name="apartamento_id_apartamento" class="form-control" required>
                     <option value="" selected disabled>Selecione</option>
                     <?php foreach ($data['apartamentos'] as $key => $value) {?>

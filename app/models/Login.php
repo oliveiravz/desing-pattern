@@ -21,12 +21,14 @@ class Login extends Model
                     morador.email,
                     morador.nome,
                     morador.senha,
-                    morador.nome
+                    morador.nome,
+                    morador.admin
                 FROM morador
                 INNER JOIN apartamento ON apartamento.id_apartamento = morador.apartamento_id_apartamento
                 WHERE morador.ativo IS TRUE
                 AND morador.email = :email
                 AND morador.senha = :senha";
+                
         $conn = new Connection();
         $pdo = $conn->getPdo();
         

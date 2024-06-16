@@ -25,9 +25,10 @@ class Controller
         }
 
         $params = new ControllerParams();
-        $params->get($router);
 
-        return $controller->$method($params);
+        $paramUrl = $params->get($router);
+
+        return $controller->$method($paramUrl);
 
     }
 }

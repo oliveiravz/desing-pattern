@@ -10,7 +10,7 @@ abstract class Model
 {
     private string $fields = "*";
     private string $filters = "";
-
+    
     public function fetchAll() {
 
         try {
@@ -28,6 +28,4 @@ abstract class Model
             throw new \Exception("Error: " .$e->getMessage());
         }
     }
-
-
 }

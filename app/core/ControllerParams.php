@@ -15,9 +15,11 @@ class ControllerParams
         $explodeRouter = explode("/", $router);
         
         foreach($explodeRouter as $index => $routerSegment) {
+
             if($routerSegment !== $explodeUri[$index]) {
                 $params[$index] = $explodeUri[$index];
             }
+
         }
 
         return $params;
@@ -25,6 +27,7 @@ class ControllerParams
 
     public function get(string $router) {
         $routes = Routes::get();
+
         $requesMethod = RequestType::get();
         $indexRouter = array_search($router, $routes[$requesMethod]);
         $params = $this->filtersParams($indexRouter);

@@ -6,7 +6,7 @@ use App\Config\Connection;
 
 class Reserva extends Model
 {
-    protected $table = 'reserva';
+    protected $table = 'reservas';
 
     public function create($data) {
         // dd($data);   
@@ -26,23 +26,63 @@ class Reserva extends Model
         return $stmt->execute();
     }
 
-    public function fetchAllByUser($userId) {
 
+    public function delete($userId) {
+        
+        if(is_array($userId)) {
+            $userId = $userId[0];
+        }
+
+        $sql = "UPDATE reservas SET ativo = FALSE WHERE id_reservas = :id";
+
+        $connection = new Connection();
+        $pdo = $connection->getPdo();
+
+        $stmt = $pdo->prepare($sql);
+        
+        $stmt->bindParam(':id', $userId);
+        
+        return $stmt->execute();
+    }
+
+    public function fetchAllByUser($userId) {
+        
+        if(is_array($userId)) {
+            $userId = $userId[0];
+        }
+        
         $sql = "SELECT 
-                    r.*, a.nome 
+                    r.id_reservas,
+                    r.data_reserva,
+                    a.nome 
                 FROM reservas r
                 INNER JOIN areas_lazer a ON r.id_areas_lazer = a.id_areas_lazer
-                WHERE r.id_morador = :user_id";
-        
+                WHERE r.ativo IS TRUE
+                AND r.id_morador = :user_id";
         $connection = new Connection();
         $pdo = $connection->getPdo();
 
         $stmt = $pdo->prepare($sql);
         
         $stmt->bindParam(':user_id', $userId);
+        
         $stmt->execute();
         
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+
+    public function getReservasAtivas() {
+        
+        $sql = "SELECT a.nome, r.data_reserva FROM reservas r INNER JOIN areas_lazer a ON r.id_areas_lazer = a.id_areas_lazer WHERE r.ativo IS TRUE";
+        
+        $connection = new Connection();
+        $pdo = $connection->getPdo();
+
+        $stmt = $pdo->prepare($sql);
+        
+        $stmt->execute();
+        
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

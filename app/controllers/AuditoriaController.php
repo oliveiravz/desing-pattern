@@ -6,7 +6,7 @@ use App\Models\Auditoria;
 
 class AuditoriaController extends Controller 
 {
-    protected string $view = "relatorio";
+    protected string $view = "auditoria";
     protected string $title = "Controle de login";
 
     public function get() {
