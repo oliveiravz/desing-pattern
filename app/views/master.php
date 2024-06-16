@@ -42,6 +42,7 @@
     <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
     <?= $this->section('fullcalendar') ?>
     <?= $this->section('reservasJs') ?>
+    <?= $this->section('delecoesJs') ?>
     <?php 
         if(!empty($_SESSION)) {
             $this->insert('/templates/footer');

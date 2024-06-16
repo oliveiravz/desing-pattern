@@ -24,11 +24,11 @@ $this->layout(
                             <hr class="my-4">
                             <div data-mdb-input-init class="form-outline mb-4">
                                 <label class="form-label" for="email">E-mail</label>
-                                <input type="email" id="email" name="email" class="form-control form-control-lg" value="joao.silva@example.com"/>
+                                <input type="email" id="email" name="email" class="form-control form-control-lg" value=""/>
                             </div>
                             <div data-mdb-input-init class="form-outline mb-4">
                                 <label class="form-label" for="senha">Senha</label>
-                                <input type="password" id="senha" name="senha" class="form-control form-control-lg" value="$2y$10$E9bU/jCl7FzR/8O4bF6eU.WxG8GyyTtbfThptph/HL8X8u9PvX6yW"/>
+                                <input type="password" id="senha" name="senha" class="form-control form-control-lg" value=""/>
                             </div>
                             <!-- Checkbox -->
                             <div class="form-check d-flex justify-content-start mb-4">

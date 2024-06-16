@@ -1,6 +1,7 @@
 <?php
 namespace App\Models;
 
+use PDO;
 use App\Config\Connection;
 
 class Auditoria extends Model
@@ -23,4 +24,22 @@ class Auditoria extends Model
 
         $stmt->execute();
     }
+
+    public function getDeletes() {
+
+        $sql = "SELECT 
+                    dl.*,
+                    m.nome
+                FROM deletion_logs dl
+                INNER JOIN morador m ON dl.deleted_by = m.id_morador;
+                ";
+        $conn = new Connection();
+        $pdo = $conn->getPdo();
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 }

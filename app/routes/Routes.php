@@ -16,7 +16,9 @@ class Routes
                 "/relatorio" => "AuditoriaController@get",
                 "/areas" => "AreasLazerController@get",
                 "/reservas" => "ReservaController@getReservas",
+                "/reservas-ativas" => "ReservaController@getReservasAtivas",
                 "/reservas/morador/[0-9]+" => "ReservaController@getReservasByMorador",
+                "/delecoes" => "DelecoesController@getDeletes",
                 "/logout" => "Logout@logout"
             ],
            "post" => [

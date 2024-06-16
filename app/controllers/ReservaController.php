@@ -9,7 +9,7 @@ class ReservaController extends Controller
     protected string $title = "Minhas Reservas";
 
     public function getReservasByMorador($id) {
-        
+
         $reserva = new Reserva();
 
         $reservas = $reserva->fetchAllByUser($id);
@@ -57,6 +57,14 @@ class ReservaController extends Controller
         
         exit(json_encode($reservas));
     }
+    
+    public function getReservasAtivas() {
 
+        $reserva = new Reserva();
+        
+        $reservas = $reserva->getReservasAtivas();
+        
+        $this->index($reservas);
+    }
 
 }

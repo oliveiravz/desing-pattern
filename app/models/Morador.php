@@ -30,7 +30,7 @@ class Morador extends Model
             return ["success" => false, "message" => "Morador já cadastrado no sistema"];
         }
 
-        return true;
+        return [];
     }
 
     public function create($data) {

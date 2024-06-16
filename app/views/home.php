@@ -29,6 +29,8 @@
         <input type="hidden" name="user_id" id="user_id" value="<?=$_SESSION['user']['id_morador']?>">
         <input type="hidden" name="user_apartamento" id="user_apartamento" value="<?=$_SESSION['user']['id_apartamento']?>">
     </div>
+    <br>
+    <br>
 </main>
 
 <?= $this->start('fullcalendar')?>

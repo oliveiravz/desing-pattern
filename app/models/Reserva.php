@@ -27,10 +27,10 @@ class Reserva extends Model
     }
 
 
-    public function delete($userId) {
+    public function delete($reservaId) {
         
-        if(is_array($userId)) {
-            $userId = $userId[0];
+        if(is_array($reservaId)) {
+            $reservaId = $reservaId[0];
         }
 
         $sql = "UPDATE reservas SET ativo = FALSE WHERE id_reservas = :id";
@@ -38,12 +38,15 @@ class Reserva extends Model
         $connection = new Connection();
         $pdo = $connection->getPdo();
 
+        $this->logDeletion('reservas', $reservaId, $_SESSION['user']['id_morador'], $_SERVER['REMOTE_ADDR']);
+
         $stmt = $pdo->prepare($sql);
         
-        $stmt->bindParam(':id', $userId);
+        $stmt->bindParam(':id', $reservaId);
         
         return $stmt->execute();
     }
+
 
     public function fetchAllByUser($userId) {
         
@@ -59,6 +62,7 @@ class Reserva extends Model
                 INNER JOIN areas_lazer a ON r.id_areas_lazer = a.id_areas_lazer
                 WHERE r.ativo IS TRUE
                 AND r.id_morador = :user_id";
+                
         $connection = new Connection();
         $pdo = $connection->getPdo();
 
@@ -67,14 +71,24 @@ class Reserva extends Model
         $stmt->bindParam(':user_id', $userId);
         
         $stmt->execute();
-        
+
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
 
     public function getReservasAtivas() {
         
-        $sql = "SELECT a.nome, r.data_reserva FROM reservas r INNER JOIN areas_lazer a ON r.id_areas_lazer = a.id_areas_lazer WHERE r.ativo IS TRUE";
+        $sql = "SELECT 
+                    a.nome, 
+                    r.id_reservas,
+                    r.data_reserva,
+                    r.id_morador,
+                    m.nome as nome_morador,
+                    m.admin
+                FROM reservas r 
+                INNER JOIN areas_lazer a ON r.id_areas_lazer = a.id_areas_lazer
+                INNER JOIN morador m ON r.id_morador = m.id_morador
+                WHERE r.ativo IS TRUE";
         
         $connection = new Connection();
         $pdo = $connection->getPdo();
