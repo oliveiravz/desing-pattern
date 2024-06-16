@@ -12,6 +12,7 @@ class Routes
                 "/home" => "HomeController@index",
                 "/morador" => "MoradorController@index",
                 "/morador" => "MoradorController@getApartamentos",
+                "/moradores" => "MoradoresController@getMoradores",
                 "/apartamentos" => "ApartamentoController@store",
                 "/relatorio" => "AuditoriaController@get",
                 "/areas" => "AreasLazerController@get",
@@ -25,7 +26,8 @@ class Routes
                 "/morador" => "MoradorController@store",
                 "/validate" => "LoginController@validate",
                 "/reservar" => "ReservaController@store",
-                "/reserva/excluir/[0-9]+" => "ReservaController@delete"
+                "/reserva/excluir/[0-9]+" => "ReservaController@delete",
+                "/morador/excluir/[0-9]+" => "MoradoresController@delete"
             ]
         ]; 
     }

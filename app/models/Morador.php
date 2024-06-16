@@ -70,4 +70,41 @@ class Morador extends Model
         return ["success" => false , "message" => "Morador {$nome} cadastrado com sucesso"];
     }
 
+    public function getMoradoresAtivos() {
+        $sql = "SELECT
+                    m.*,
+                    a.descricao as nome_apartamento
+                FROM morador m
+                INNER JOIN apartamento a ON a.id_apartamento = m.apartamento_id_apartamento
+                WHERE m.ativo";
+
+        $connection = new Connection();
+        $pdo = $connection->getPdo();
+
+        $stmt = $pdo->prepare($sql);
+
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function delete($id) {
+
+        if(is_array($id)) {
+            $id = $id[0];
+        }
+
+        $sql = "UPDATE morador SET ativo = FALSE WHERE id_morador = :id";
+
+        $connection = new Connection();
+        $pdo = $connection->getPdo();
+
+        $this->logDeletion('morador', $id, $_SESSION['user']['id_morador'], $_SERVER['REMOTE_ADDR']);
+
+        $stmt = $pdo->prepare($sql);
+        
+        $stmt->bindParam(':id', $id);
+        
+        return $stmt->execute();
+    }
 }
