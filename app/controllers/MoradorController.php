@@ -36,6 +36,8 @@ class MoradorController extends Controller
 
         }
 
+        $senhaHash = password_hash($data['senha'], PASSWORD_DEFAULT);
+        
         $moradorBuilder
         ->setEmail($data['email'])
         ->setEmailDois($data['email_dois'] ?? null)
@@ -43,7 +45,7 @@ class MoradorController extends Controller
         ->setCpf($data['cpf'])
         ->setAtivo($data['ativo'] ?? true)
         ->setCreatedAt(isset($data['created_at']) ? new \DateTime($data['created_at']) : null)
-        ->setSenha($data['senha'])
+        ->setSenha($senhaHash)
         ->setApartamentoId($data['apartamento_id_apartamento'])
         ->setTelefone($data['telefone'] ?? null)
         ->setTelefoneDois($data['telefone_dois'] ?? null)
@@ -51,7 +53,7 @@ class MoradorController extends Controller
 
         $validate = $morador->validate($moradorBuilder);
 
-        if(!$validate['success']) {
+        if(isset($validate['success']) && !$validate['success']) {
             $response = $validate;
         }else{
             $response = $morador->create($moradorBuilder);

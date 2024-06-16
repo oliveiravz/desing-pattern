@@ -28,4 +28,21 @@ abstract class Model
             throw new \Exception("Error: " .$e->getMessage());
         }
     }
+
+    public function logDeletion($table_name, $record_id, $deleted_by, $ip_address) {
+
+        $sql = "INSERT INTO deletion_logs (table_name, record_id, deleted_by, ip_address) 
+                VALUES (:table_name, :record_id, :deleted_by, :ip_address)";
+
+        $conn = new Connection();
+        $pdo = $conn->getPdo();
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':table_name', $table_name);
+        $stmt->bindParam(':record_id', $record_id);
+        $stmt->bindParam(':deleted_by', $deleted_by);
+        $stmt->bindParam(':ip_address', $ip_address);
+
+        return $stmt->execute();
+    }
 }

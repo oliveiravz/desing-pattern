@@ -20,7 +20,7 @@ class LoginController extends Controller
         $data             = Request::all();
 
         $validate = $validateStrategy->validate($data);
-
+        
         if(isset($validate['erro'])) {
             return $this->index($validate);
         }
@@ -30,8 +30,6 @@ class LoginController extends Controller
         $ip = $ClientIp->get();
         
         $_SESSION['user']['ip'] = $ip;
-
-        $auditoria->loginAttempt($_SESSION);
 
         if(!isset($_SESSION['message_error'])) {
 

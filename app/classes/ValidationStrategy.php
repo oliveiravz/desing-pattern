@@ -8,7 +8,7 @@ use App\Models\Login;
 class ValidationStrategy implements ValidationInterface
 {
     public function validate(array $data) {
-        
+    
         $erros = [];
         if(empty($data['email'])){
             $erros['message'] = 'Informe o apartamento';
@@ -21,15 +21,21 @@ class ValidationStrategy implements ValidationInterface
         $user = new Login();
         $validate = $user->getMorador($data); 
 
-        if(!$validate) {
-            $erros['message'] = 'Apartamento e/ou senha inválidos';
+        // dd($validate);
+        if(!$validate['success']) {
+            $erros['message'] = $validate['message'];
+        }
+
+        if(empty($validate)) {
+            $erros['message'] = "E-mail e/ou inválidos";
+            $erros['erro'] = true;
+            return $erros;
         }
 
         if(count($erros) > 0) {
-            $erros['data'] = $data;
-            
-            $erros['erro'] = true;
 
+            $erros['data'] = $data;
+            $erros['erro'] = true;
             return $erros;
         }
 

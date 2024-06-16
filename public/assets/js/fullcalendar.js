@@ -41,12 +41,11 @@ $(document).ready(function() {
             });
         },
         dateClick: function(info) {
-
-            console.log(info);
             var selectedDate = info.dateStr;
 
             var events = calendar.getEvents();
 
+            console.log(events);
             var eventExists = events.some(function(event) {
                 return event.start === selectedDate;
             });
@@ -78,6 +77,10 @@ $(document).ready(function() {
                         inputOptions: options,
                         inputPlaceholder: 'Selecione uma área de lazer',
                         confirmButtonText: 'Reservar',
+                        customClass: {
+                            confirmButton: "btn btn-primary",
+                            cancelButton: "btn btn-active-light"
+                        },
                         preConfirm: (selectedArea) => {
                             if (!selectedArea) {
                                 Swal.showValidationMessage('Selecione uma área de lazer');
