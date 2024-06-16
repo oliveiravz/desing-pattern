@@ -2,14 +2,14 @@ $(function() {
     
     drawTable();
 
-    $('#reservas tbody').find('tr').each(function() {
+    $('#moradores tbody').find('tr').each(function() {
         
-        var idReserva = $(this).find('.excluir_reserva').data('id_reserva');
+        var idMorador = $(this).find('.excluir_morador').data('id_morador');
         
-        $(`#excluir_${idReserva}`).click(function() {
+        $(`#excluir_${idMorador}`).click(function() {
             
             Swal.fire({
-                title: 'Deseja cancelar essa reserva?',
+                title: 'Deseja excluir morador?',
                 showDenyButton: true,
                 denyButtonText: 'Cancelar',
                 icon: 'warning',
@@ -18,14 +18,14 @@ $(function() {
 
                 if(result.isConfirmed) {     
                     $.ajax({
-                        url: `/reserva/excluir/${idReserva}`,
+                        url: `/morador/excluir/${idMorador}`,
                         type: 'POST',
                         dataType: 'JSON',
                         contentType: 'application/json',
                         beforeSend: function(response) {
                             Swal.fire({
                                 title: "Aguarde!",
-                                text: "Excluindo Evento",
+                                text: "Excluindo Morador",
                                 timer: 2000,
                                 timerProgressBar: true,
                                 didOpen: () => {
@@ -43,7 +43,7 @@ $(function() {
                         success: function(response) {
                             
                             if(response.success) {
-                                Swal.fire('Sucesso!', `Reserva cancelada com sucesso!`, 'success');
+                                Swal.fire('Sucesso!', `Morador excluído com sucesso!`, 'success');
                             }
 
                             location.reload();
@@ -56,7 +56,7 @@ $(function() {
 });
 
 function drawTable() {
-    let table = new DataTable('#reservas', {
+    let table = new DataTable('#moradores', {
         responsive: true,
         language: {
             "sEmptyTable": "Nenhum registro encontrado",
