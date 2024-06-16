@@ -43,6 +43,7 @@
     <?= $this->section('fullcalendar') ?>
     <?= $this->section('reservasJs') ?>
     <?= $this->section('delecoesJs') ?>
+    <?= $this->section('moradoresJs') ?>
     <?php 
         if(!empty($_SESSION)) {
             $this->insert('/templates/footer');

@@ -15,6 +15,12 @@
 			<span class="tooltip">Cadastrar moradores</span>
 		</li>
 		<li>
+			<a href="/moradores">
+				<i class="fas fa-users" style="color: #ffffff;"></i>
+			</a>
+			<span class="tooltip">Moradores Cadastrados	</span>
+		</li>
+		<li>
 			<a href="/reservas-ativas">
 				<i class="fas fa-calendar-check" style="color: #ffffff;"></i>
 			</a>
