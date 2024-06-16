@@ -85,3 +85,8 @@ body {
 .sidebar-navigation ul li.active i {
     color: #98D7EC; 
 }
+
+.sidebar-navigation ul:last-child li:last-child {
+    margin-top: auto;   
+    margin-bottom: 20px;
+}

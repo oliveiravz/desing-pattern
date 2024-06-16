@@ -22,9 +22,8 @@ $(document).ready(function() {
                 url: '/reservas',
                 type: 'GET',
                 dataType: 'JSON',
-                data: { user_id: userId },
                 success: function(response) {
-                    console.log(response);
+                    
                     var events = response.map(function(reserva) {
                         return {
                             title: reserva.nome,
@@ -42,6 +41,22 @@ $(document).ready(function() {
             });
         },
         dateClick: function(info) {
+
+            console.log(info);
+            var selectedDate = info.dateStr;
+
+            var events = calendar.getEvents();
+
+            var eventExists = events.some(function(event) {
+                return event.start === selectedDate;
+            });
+
+            console.log(events);
+            if (eventExists) {
+                Swal.fire('Data Bloqueada', 'Esta data já possui uma reserva. Escolha outra data.', 'warning');
+                return;
+            }
+
             $.ajax({
                 url: '/areas',
                 type: 'GET',
@@ -74,7 +89,6 @@ $(document).ready(function() {
                             
                             let selectedAreaId = result.value;
                             let selectedAreaDescricao = options[selectedAreaId];
-                            let selectedDate = info.dateStr;
 
                             if (selectedAreaId && selectedAreaDescricao) {
                                 calendar.addEvent({
@@ -115,5 +129,6 @@ $(document).ready(function() {
             });
         }
     });
+
     calendar.render();
 });

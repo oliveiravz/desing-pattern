@@ -5,39 +5,57 @@ use App\Models\Reserva;
 
 class ReservaController extends Controller
 {
+    protected string $view = "reservas";
+    protected string $title = "Minhas Reservas";
+
+    public function getReservasByMorador($id) {
+        
+        $reserva = new Reserva();
+
+        $reservas = $reserva->fetchAllByUser($id);
+
+        $this->index($reservas);
+    }
+
+    public function delete($id) {
+        
+        $reserva = new Reserva();
+
+        $result = $reserva->delete($id);
+
+        if ($result) {
+           exit(json_encode(['success' => true, "message" => "Reserva cancelar com sucesso"]));
+        } 
+
+        exit(json_encode(['success' => false, "message" => 'Erro o cancelar reserva']));
+    }
+
     public function store() {
         $data = json_decode(file_get_contents('php://input'), true);
 
         if (!$data) {
             http_response_code(400);
-            echo json_encode(['error' => 'Dados inválidos']);
-            return;
+            exit(json_encode(['error' => 'Dados inválidos']));
         }
 
         $reserva = new Reserva();
         $result = $reserva->create($data);
 
         if ($result) {
-            echo json_encode(['success' => 'Reserva registrada com sucesso']);
+            exit(json_encode(['success' => 'Reserva registrada com sucesso']));
         } else {
             http_response_code(500);
-            echo json_encode(['error' => 'Erro ao registrar a reserva']);
+            exit(json_encode(['error' => 'Erro ao registrar a reserva']));
         }
     }
 
     public function getReservas() {
-        $userId = $_GET['user_id'] ?? null;
-        
-        if (!$userId) {
-            http_response_code(400);
-            echo json_encode(['error' => 'ID do usuário não fornecido']);
-            return;
-        }
 
         $reserva = new Reserva();
-        $reservas = $reserva->fetchAllByUser($userId);
-
-        echo json_encode($reservas);
+        
+        $reservas = $reserva->getReservasAtivas();
+        
+        exit(json_encode($reservas));
     }
 
 

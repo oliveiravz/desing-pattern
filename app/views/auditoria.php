@@ -5,8 +5,6 @@
             'title' => "$title"
         ]
     );
-
-    // dd($data);
 ?>
 
 <main class="content">
@@ -14,10 +12,10 @@
         <h1 style="text-align: center;">Relatório</h1>
         <br>
         <br>
-        <table class="table table-striped">
-            <theadc class="thead-dark">
+        <table class="table table-striped" id="auditoria">
+            <thead class="thead-dark">
                 <tr>
-                    <th scope="col"><E-mail></E-mail></th>
+                    <th scope="col">E-mail</th>
                     <th scope="col">Sucesso/Falha</th>
                     <th scope="col">Endereço IP</th>
                     <th scope="col">Data login</th>
@@ -36,4 +34,8 @@
         </table>
     </div>
 </main>
+<?= $this->start('reservasJs')?>
+    <script src="/assets/js/auditoria.js"></script>
+<?= $this->stop()?>
+
 

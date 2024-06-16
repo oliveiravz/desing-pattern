@@ -1,32 +1,34 @@
-<link rel="stylesheet" href="assets/css/sidebar.css">
+<link rel="stylesheet" href="/assets/css/sidebar.css">
 <nav class="sidebar-navigation">
 	<ul>
 		<li class="active">
 			<a href="/home">
-				<i class="fa fa-solid fa-book"></i>
+				<i class="fa fa-solid fa-book" style="color: #ffffff;"></i>
 			</a>
 			<span class="tooltip">Home</span>
 		</li>
-		<? if(isset($_SESSION['user']['admin']) && $_SESSION['user']['admin']) { ?>
+		<?php if(isset($_SESSION['user']['admin']) && $_SESSION['user']['admin'] == '1') { ?>
 		<li>
-			<a href="/user">
+			<a href="/morador">
 				<i class="fa fa-user" style="color: #ffffff;"></i>
 			</a>
-			<span class="tooltip">Cadastrar usuários</span>
+			<span class="tooltip">Cadastrar moradores</span>
 		</li>
-		<? } ?>
+		<?php } ?>
 		<li>
-			<a href="#">
+			<a href="/reservas/morador/<?=$_SESSION['user']['id_morador']?>">
 				<i class="fas fa-clipboard-list" style="color: #ffffff;"></i>
 			</a>
 			<span class="tooltip">Minhas Reservas</span>
 		</li>
+		<?php if(isset($_SESSION['user']['admin']) && $_SESSION['user']['admin'] == '1') { ?>
 		<li>
 			<a href="/relatorio">
 				<i class="fas fa-list" style="color: #ffffff;"></i>
 			</a>
 			<span class="tooltip">Relatórios de login</span>
 		</li>
+		<?php } ?>
 		<li>
 			<a href="/logout">
 				<i class="fas fa-sign-out-alt" style="color: #ffffff;"></i>
@@ -35,11 +37,3 @@
 		</li>
 	</ul>
 </nav>
-<script>
-
-	   $('ul li').on('click', function() {
-			$('li').removeClass('active');
-			$(this).addClass('active');
-		});
-		
-</script>
