@@ -1,8 +1,8 @@
 <?php
 namespace App\Models;
 
-use PDO;
 use App\Config\Connection;
+use PDO;
 
 class Login extends Model implements MoradorInterface
 {
@@ -26,7 +26,7 @@ class Login extends Model implements MoradorInterface
                 AND morador.email = :email
                 AND morador.senha = :senha";
         
-        $conn = new Connection();
+        $conn = Connection::getInstance();
         $pdo = $conn->getPdo();
         
         $stmt = $pdo->prepare($sql);

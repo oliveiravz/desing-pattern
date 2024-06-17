@@ -7,20 +7,27 @@ use Dotenv\Dotenv;
 
 class Connection
 {
+    private static $instance = null;
     private $pdo;
 
-    public function __construct() {
+    private function __construct() {
         $this->loadEnv();
         $this->connect();
     }
 
-    public function loadEnv() {
+    public static function getInstance() {
+        if (self::$instance === null) {
+            self::$instance = new self();
+        }
+        return self::$instance;
+    }
+
+    private function loadEnv() {
         $dotEnv = Dotenv::createImmutable(__DIR__ . "/../..");
         $dotEnv->load();
     }
 
-    public function connect() {
-        // var_dump($_ENV);exit;
+    private function connect() {
         $dbHost = $_ENV['DB_HOST'];
         $dbPort = $_ENV['DB_PORT'];
         $dbUser = $_ENV['DB_USER'];
@@ -31,13 +38,14 @@ class Connection
             $this->pdo = new PDO("mysql:host=$dbHost;port=$dbPort;dbname=$dbName", $dbUser, $dbPass);
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
-            
-            die("Connection error: ".$e->getMessage());
-
+            die("Connection error: " . $e->getMessage());
         }
     }
 
     public function getPdo() {
         return $this->pdo;
     }
+
+    private function __clone() {}
+    private function __wakeup() {}
 }
