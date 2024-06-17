@@ -1,6 +1,7 @@
 .footer {
-    color: #FFF;
-    background-color: black;
+    color: #ffffff;
+    background-color: #00008B;
     bottom: 0;
     width: 100%;
+    font-weight: bold;
 }

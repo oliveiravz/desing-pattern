@@ -5,10 +5,46 @@ i {
 
 #calendar {
     width: 100%;
-    border: 1px solid #313443;
+    border: 1px solid #FF4500;
     border-radius: 4px;
     background-color: #FFF;
     padding: 15px;
+}
+
+/* Botões de navegação */
+.fc-button-primary {
+    background-color: #4A90E2; /* Cor de fundo dos botões */
+    color: #fff; /* Cor do texto dos botões */
+    border: none; /* Remove a borda */
+}
+
+.fc-button-primary:hover {
+    background-color: #357ABD; /* Cor de fundo dos botões ao passar o mouse */
+}
+
+/* Botão "Today" */
+.fc-button-today {
+    background-color: #00008B; /* Cor de fundo do botão "Today" */
+    color: #fff; /* Cor do texto do botão "Today" */
+}
+
+.fc-button-today:hover {
+    background-color: #2525df; /* Cor de fundo do botão "Today" ao passar o mouse */
+}
+
+/* Título do mês */
+.fc-toolbar-title {
+    color: #333; /* Cor do texto do título do mês */
+}
+
+/* Botões de mudança de visualização */
+.fc-button-group .fc-button {
+    background-color: #00008B; /* Cor de fundo dos botões de visualização */
+    color: #fff; /* Cor do texto dos botões de visualização */
+}
+
+.fc-button-group .fc-button:hover {
+    background-color: #2525df; /* Cor de fundo dos botões de visualização ao passar o mouse */
 }
 
 .comunicado {
