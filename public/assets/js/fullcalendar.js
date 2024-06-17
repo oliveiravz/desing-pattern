@@ -12,6 +12,12 @@ $(document).ready(function() {
             center: 'title',
             right: 'dayGridMonth,timeGridWeek,timeGridDay'
         },
+        buttonText: {
+            today: 'Hoje',
+            month: 'Mês',
+            week: 'Semana',
+            day: 'Dia'
+        },
         validRange: function(nowDate) {
             return {
                 start: nowDate,
